@@ -14,4 +14,4 @@ newtype Public = Public { public :: String }
 newtype Guess = Guess Char
 
 check :: Secret -> Public -> Guess -> (Bool, Public)
-check = undefined
+check s p (Guess g) = (g `elem` secret s, p)
