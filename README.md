@@ -1,4 +1,4 @@
-TennisKata
+Starman
 ==========
 
 New Haskell project using stack template `tasty-travis`.
