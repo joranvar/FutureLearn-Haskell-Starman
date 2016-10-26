@@ -3,15 +3,13 @@ module Lib
   (
     -- * Domain types
     Secret(..)
-  , Public(..)
   , Guess(..)
   -- * Exported functions
   , check
   ) where
 
-newtype Secret = Secret { secret :: String }
-newtype Public = Public { public :: String }
+data Secret = Secret { secret :: [(Char, Bool)] }
 newtype Guess = Guess Char
 
-check :: Secret -> Public -> Guess -> (Bool, Public)
-check s p (Guess g) = (g `elem` secret s, p)
+check :: Secret -> Guess -> (Bool, Secret)
+check s (Guess g) = (g `elem` (map fst $ secret s), s)

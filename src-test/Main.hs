@@ -23,7 +23,7 @@ tests =
 scTests :: [TestTree]
 scTests =
   [ testProperty "Guessing a letter that exists, yields (True, _)" $
-    \secret' public' guess -> guess `elem` secret' ==> (fst . check (Secret secret') (Public public')) (Guess guess) == True
+    \secret' guess -> (fst . check (Secret { secret = (guess, False) : secret'})) (Guess guess) == True
   ]
 
 huTests :: [TestTree]
