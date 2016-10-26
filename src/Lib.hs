@@ -5,8 +5,13 @@ module Lib
     Secret(..)
   , Public(..)
   , Guess(..)
+  -- * Exported functions
+  , check
   ) where
 
 newtype Secret = Secret { secret :: String }
 newtype Public = Public { public :: String }
 newtype Guess = Guess Char
+
+check :: Secret -> Public -> Guess -> (Bool, Public)
+check = undefined
