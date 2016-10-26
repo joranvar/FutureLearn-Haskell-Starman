@@ -6,6 +6,7 @@ module Lib
   , Guess(..)
   -- * Exported functions
   , check
+  , turn
   ) where
 
 data Secret = Secret { secret :: [(Char, Bool)] }
@@ -13,3 +14,11 @@ newtype Guess = Guess Char
 
 check :: Secret -> Guess -> (Bool, Secret)
 check s (Guess g) = (g `elem` (map fst $ secret s), Secret $ map (\(c, b) -> (c, b || c == g)) $ secret s)
+
+turn :: Secret -> Int -> IO ()
+turn _ 0                      = putStrLn "You lose"
+turn (Secret s) _ | all snd s = putStrLn "You win!"
+turn s n                      = mkguess s >>= flip turn (n-1)
+
+mkguess :: Secret -> IO Secret
+mkguess = undefined
