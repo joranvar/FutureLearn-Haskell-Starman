@@ -28,7 +28,7 @@ scTests =
     \secret' guess ->
       let (Secret s) = (snd . check (Secret { secret = (guess, False) : secret'})) (Guess guess)
           found = filter ((== guess) . fst) s
-      in (and $ map snd found) && (not . null) found
+      in (all snd found) && (not . null) found
   ]
 
 huTests :: [TestTree]
