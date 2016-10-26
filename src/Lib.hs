@@ -18,7 +18,16 @@ check s (Guess g) = (g `elem` (map fst $ secret s), Secret $ map (\(c, b) -> (c,
 turn :: Secret -> Int -> IO ()
 turn _ 0                      = putStrLn "You lose"
 turn (Secret s) _ | all snd s = putStrLn "You win!"
-turn s n                      = mkguess s >>= flip turn (n-1)
+turn s n                      = mkguess s n
 
-mkguess :: Secret -> IO Secret
-mkguess = undefined
+mkguess :: Secret -> Int -> IO ()
+mkguess s n = do
+  putStrLn (public s ++ " " ++ replicate n '*')
+  putStr "  Enter your guess: "
+  q <- getLine
+  let (correct, s') = check s (Guess $ q!!0)
+  let n' = if correct then n else n-1
+  turn s' n'
+
+public :: Secret -> String
+public = map (\(c, b) -> if b then c else '-') . secret
