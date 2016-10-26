@@ -1,3 +1,5 @@
+{-# LANGUAGE TupleSections #-}
+
 -- | Starman - https://www.futurelearn.com/courses/functional-programming-haskell/1/steps/116475
 module Lib
   (
@@ -7,6 +9,7 @@ module Lib
   -- * Exported functions
   , check
   , turn
+  , starman
   ) where
 
 data Secret = Secret { secret :: [(Char, Bool)] }
@@ -31,3 +34,6 @@ mkguess s n = do
 
 public :: Secret -> String
 public = map (\(c, b) -> if b then c else '-') . secret
+
+starman :: String -> Int -> IO ()
+starman s n = turn (Secret $ map (,False) s) n
