@@ -19,7 +19,7 @@ cabal-version:       >=1.10
 extra-source-files:
   README.md
   stack.yaml
-  guardfile
+  Guardfile
 
 source-repository head
   type:     git
