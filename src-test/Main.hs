@@ -24,6 +24,11 @@ scTests :: [TestTree]
 scTests =
   [ testProperty "Guessing a letter that exists, yields (True, _)" $
     \secret' guess -> (fst . check (Secret { secret = (guess, False) : secret'})) (Guess guess) == True
+  , testProperty "Guessing a letter that exists, sets all occurrences of that letter to True" $
+    \secret' guess ->
+      let (Secret s) = (snd . check (Secret { secret = (guess, False) : secret'})) (Guess guess)
+          found = filter ((== guess) . fst) s
+      in (all id $ map snd found) && (not . null) found
   ]
 
 huTests :: [TestTree]
