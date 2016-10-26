@@ -31,6 +31,7 @@ library
   hs-source-dirs:    src
   exposed-modules:   Lib
   build-depends:     base >= 4.8 && < 5
+                   , hlint
 
 executable TennisKata-exe
   default-language:  Haskell2010
